@@ -29,7 +29,7 @@ const Index = () => {
     document.getElementById('properties')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -53,17 +53,34 @@ const Index = () => {
       return;
     }
 
-    // Here you would typically send the data to your backend
-    console.log("Contact form submitted:", formData);
-    
-    toast({
-      title: "Thank you for your inquiry!",
-      description: "We'll get back to you as soon as possible.",
-    });
+    try {
+      // Create mailto link with form data
+      const subject = encodeURIComponent("New Contact Form Submission - GOX Properties");
+      const body = encodeURIComponent(
+        `New inquiry from website contact form:\n\n` +
+        `Name: ${formData.firstName} ${formData.lastName}\n` +
+        `Email: ${formData.email}\n` +
+        `Phone: ${formData.phone}\n`
+      );
+      
+      // Open default email client
+      window.location.href = `mailto:stay@rentgox.com?subject=${subject}&body=${body}`;
+      
+      toast({
+        title: "Thank you for your inquiry!",
+        description: "Opening your email client to send the message.",
+      });
 
-    // Reset form and close dialog
-    setFormData({ firstName: "", lastName: "", email: "", phone: "" });
-    setIsContactDialogOpen(false);
+      // Reset form and close dialog
+      setFormData({ firstName: "", lastName: "", email: "", phone: "" });
+      setIsContactDialogOpen(false);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was a problem sending your message. Please try again or email us directly at stay@rentgox.com",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
