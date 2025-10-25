@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+// import { Input } from "@/components/ui/input";
+// import { Label } from "@/components/ui/label";
 import PropertyCard from "@/components/PropertyCard";
-import { CheckCircle2, Heart, Home, Key, Shield, Wifi } from "lucide-react";
+import { CheckCircle2, Heart, Home, Key, Shield, Wifi, PhoneCall, MailIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import heroImage from "@/assets/hero-home.jpg";
 import goxLogo from "@/assets/gox-logo.png";
@@ -351,23 +351,36 @@ const Index = () => {
           <Button 
             size="lg" 
             variant="outline"
-            onClick={() => document.getElementById('callLink').click()}
-            // onClick={() => setIsContactDialogOpen(true)}
+            onClick={() => setIsContactDialogOpen(true)}
             className="bg-transparent border-white text-white hover:bg-white/10 text-lg px-8 py-6"
           >
-            Call To Learn More
+            Call or Email to Learn More
           </Button>
           
           
-          {/* {<Dialog open={isContactDialogOpen} onOpenChange={setIsContactDialogOpen}>
+          <Dialog open={isContactDialogOpen} onOpenChange={setIsContactDialogOpen}>
             <DialogContent className="sm:max-w-md">
               <DialogHeader>
                 <DialogTitle>Contact for Information</DialogTitle>
-                <DialogDescription>
+                {/* <DialogDescription>
                   Please provide your contact information and we'll get back to you soon.
-                </DialogDescription>
+                </DialogDescription> */}
               </DialogHeader>
-              <form onSubmit={handleContactSubmit} className="space-y-4">
+              {/* Show only phone number with icon (no label) per request */}
+              <div className="mx-auto max-w-md rounded-lg mt-2 flex items-center gap-3">
+                <div className="flex-shrink-0 rounded-full bg-primary/10 p-3">
+                  <PhoneCall className="w-5 h-5 text-primary" />
+                </div>
+                <a href="tel:+17573054532" className="text-foreground font-semibold text-lg hover:underline">+1 (757) 305-4532</a>
+              </div>
+              <div className="mx-auto max-w-md rounded-lg mb-4 flex items-center gap-3">
+                <div className="flex-shrink-0 rounded-full bg-primary/10 p-3">
+                  <MailIcon className="w-5 h-5 text-primary" />
+                </div>
+                <a href="mailto:stay@rentgox.com" className="text-foreground font-semibold text-lg hover:underline">stay@rentgox.com</a>
+              </div>
+
+              {/* <form onSubmit={handleContactSubmit} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="firstName">First Name</Label>
                   <Input
@@ -408,24 +421,26 @@ const Index = () => {
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     required
                     maxLength={20}
+                    placeholder="+1 (757) 305-4532"
+                    pattern="^\\+?[0-9 ()-]{7,}$"
                   />
                 </div>
                 <Button type="submit" className="w-full">Submit</Button>
-              </form>
+              </form> */}
             </DialogContent>
-          </Dialog>} */}
+          </Dialog>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="bg-beige text-beige-foreground py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
               <h3 className="text-xl font-bold mb-4">Generation of Excellence</h3>
-              <p className="opacity-80">Property Management</p>
-              <p className="opacity-80">& Rentals</p>
-              <p className="opacity-80 mt-2">Knoxville, Tennessee</p>
+              <p className="">Property Management</p>
+              <p className="">& Rentals</p>
+              <p className="mt-2">Knoxville, Tennessee</p>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Properties</h4>
@@ -438,9 +453,9 @@ const Index = () => {
             </div>
             <div>
               <h4 className="font-semibold mb-4">Contact</h4>
-              <p className="opacity-80 mb-2">Email: stay@rentgox.com</p>
-              <p className="opacity-80 mb-2">Phone: (757) 305-4532</p>
-              <p className="opacity-80">8116 Nutmeg Cir<br />Suite B<br />Knoxville, TN 37938</p>
+              <p className="mb-2">Email: <a href="mailto:stay@rentgox.com" className="text-foreground font-semibold underline">stay@rentgox.com</a></p>
+              <p className="mb-2">Phone: <a href="tel:+17573054532" className="text-foreground font-semibold">+1 (757) 305-4532</a></p>
+              <p className="">8116 Nutmeg Cir<br />Suite B<br />Knoxville, TN 37938</p>
             </div>
           </div>
           <div className="border-t border-background/20 pt-8 text-center opacity-80">
