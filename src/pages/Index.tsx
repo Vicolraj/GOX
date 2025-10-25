@@ -64,7 +64,7 @@ const Index = () => {
       );
       
       // Open default email client
-      window.location.href = `mailto:stay@rentgox.com?subject=${subject}&body=${body}`;
+      window.location.href = `tel:${subject}&body=${body}`;
       
       toast({
         title: "Thank you for your inquiry!",
@@ -347,16 +347,19 @@ const Index = () => {
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
             Experience comfort, connection, and community — the Generation of Excellence way.
           </p>
+          <a id="callLink" href="tel:+1-757-305-4532"></a>
           <Button 
             size="lg" 
             variant="outline"
-            onClick={() => setIsContactDialogOpen(true)}
+            onClick={() => document.getElementById('callLink').click()}
+            // onClick={() => setIsContactDialogOpen(true)}
             className="bg-transparent border-white text-white hover:bg-white/10 text-lg px-8 py-6"
           >
-            Contact Us to Learn More
+            Call To Learn More
           </Button>
           
-          <Dialog open={isContactDialogOpen} onOpenChange={setIsContactDialogOpen}>
+          
+          {/* {<Dialog open={isContactDialogOpen} onOpenChange={setIsContactDialogOpen}>
             <DialogContent className="sm:max-w-md">
               <DialogHeader>
                 <DialogTitle>Contact for Information</DialogTitle>
@@ -410,7 +413,7 @@ const Index = () => {
                 <Button type="submit" className="w-full">Submit</Button>
               </form>
             </DialogContent>
-          </Dialog>
+          </Dialog>} */}
         </div>
       </section>
 
